@@ -25,3 +25,14 @@ class Ticket(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class TicketMessage(models.Model):
+    ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+    reply_to = models.ForeignKey('self', null=True, on_delete=models.SET_NULL)
+    text = models.TextField(max_length=500)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.text
