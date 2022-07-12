@@ -1,3 +1,10 @@
-from django.shortcuts import render
+from rest_framework.generics import ListAPIView
+from rest_framework.permissions import IsAuthenticated
+from tickets.models import Ticket
+from tickets.serializers import TicketSerializer
 
-# Create your views here.
+
+class TicketsListAPIView(ListAPIView):
+    serializer_class = TicketSerializer
+    permission_classes = [IsAuthenticated]
+    queryset = Ticket.objects.all()

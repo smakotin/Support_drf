@@ -5,7 +5,7 @@ from .models import Ticket, TicketMessage
 
 class InlineTicketMessageAdmin(admin.StackedInline):
     model = TicketMessage
-    extra = 3
+    extra = 0
 
 
 @admin.register(TicketMessage)
@@ -20,4 +20,5 @@ class TicketAdmin(admin.ModelAdmin):
     list_filter = ('status',)
     list_display = ('id', 'title', 'status', 'description', 'created_at')
     list_editable = ('status',)
+    list_display_links = ('id', 'title')
     inlines = (InlineTicketMessageAdmin,)
